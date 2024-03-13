@@ -1,0 +1,38 @@
+int no_of_Painters(vector<int>&arr,int walls){
+    int painters=1;
+    int walls_painters=0;
+    for(int i=0;i<arr.size();i++){
+        if(walls_painters + arr[i] <= walls){
+            walls_painters += arr[i];
+        }
+        else{
+            painters++;
+            walls_painters=arr[i];
+        }
+    }
+    return painters;
+}
+int findLargestMinDistance(vector<int> &boards, int k)
+{
+    if(k > boards.size())   return -1;
+
+    int low=0;
+    int high=0;
+    for(int i=0;i< boards.size();i++){
+        high+=boards[i];
+        if(boards[i]>low){
+            low=boards[i];
+        }
+    }
+    while(low<=high){
+        int mid=low+(high-low)/2;
+        int painters=no_of_Painters(boards,mid);
+        if(painters > k){
+            low=mid+1;
+        }
+        else{
+            high=mid-1;
+        }
+    }
+    return low;
+}
