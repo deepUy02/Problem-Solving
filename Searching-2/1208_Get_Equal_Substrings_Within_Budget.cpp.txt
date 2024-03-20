@@ -1,0 +1,38 @@
+Approach-1 sliding window
+
+int equalSubstring(string s, string t, int maxCost) {
+    int n=s.length();
+    int ans=-1;
+    int win=0;
+    int i=0;
+    for(int j=0;j<n;j++){
+        win = win + abs(s[j] - t[j]);
+
+        while(win > maxCost){
+            win = win - abs(s[i] - t[i]);
+            i++;
+        }
+        ans = max(ans, j-i+1);
+    }
+    return ans;
+}
+
+
+Approach-2 Binary Search
+
+int equalSubstring(string s, string t, int maxCost) {
+    int n = s.size();
+    int start = 0;
+    int currCost = 0;
+    int maxi = 0;
+
+    for (int right=0; right<n; right++) {
+       currCost += abs(s[right] - t[right]);
+       while (start <= right && currCost > maxCost) { 
+           currCost -= abs(s[start] - t[start]);
+           start++;
+       }
+       maxi = max({maxi, right - start + 1});
+    }
+    return maxi;
+}
