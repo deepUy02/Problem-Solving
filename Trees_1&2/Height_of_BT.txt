@@ -1,0 +1,16 @@
+int dfs(TreeNode<int> *root, int &ans){
+    if(root==NULL){
+        return 0;
+    }
+    int leftdfs=dfs(root->left, ans);
+    int rightdfs=dfs(root->right,ans);
+
+    ans=1+max(leftdfs,rightdfs);
+    return ans;
+}
+int heightOfBinaryTree(TreeNode<int> *root)
+{
+	int ans=0;
+    dfs(root,ans);
+    return ans;
+}
