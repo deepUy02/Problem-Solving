@@ -1,0 +1,15 @@
+ int dfs(TreeNode* root ,int &ans){
+        if(root==NULL){
+            return -1;
+        }
+        int leftdfs=dfs(root->left,ans);
+        int rightdfs=dfs(root->right,ans);
+
+        ans=max(ans,2+leftdfs+rightdfs);
+        return 1+max(leftdfs,rightdfs);
+    }
+    int diameterOfBinaryTree(TreeNode* root){
+        int ans=0;
+        dfs(root,ans);
+        return ans;
+    }
