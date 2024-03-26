@@ -1,0 +1,23 @@
+void solve(Node* root,int &oddLevelSum,int &evenLevelSum,int level){
+        if(root==NULL)  return ;
+        
+        if(level % 2 == 0){
+            evenLevelSum += root->data;
+        }
+        else{
+            oddLevelSum += root->data;
+        }
+        
+        solve(root->left,oddLevelSum,evenLevelSum,level+1);
+        solve(root->right,oddLevelSum,evenLevelSum,level+1);
+}
+int getLevelDiff(Node *root)
+{
+       int oddLevelSum=0;
+       int evenLevelSum=0;
+       int level=1;
+       int diff=0;
+       solve(root,oddLevelSum,evenLevelSum,level);
+       diff = oddLevelSum - evenLevelSum;
+       return diff;
+}
