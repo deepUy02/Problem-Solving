@@ -1,0 +1,33 @@
+Node* lca(Node* root,int a,int b){
+        if(root==NULL)  return NULL;
+        
+        if(root->data==a || root->data==b){
+            return root;
+        }
+        Node* Llca=lca(root->left,a,b);
+        Node* Rlca=lca(root->right,a,b);
+        
+        if(Llca!=NULL && Rlca!=NULL){
+            return root;
+        }
+        else if(Llca!=NULL){
+            return Llca;
+        }
+        else if(Rlca!=NULL){
+            return Rlca;
+        }
+        return NULL;
+    }
+    int height(Node* root,int x){
+        if(root==NULL)  return 1e9;
+        if(root->data==x)   return 0;
+        
+        return 1+min(height(root->left,x),height(root->right,x));
+    }
+    int findDist(Node* root, int a, int b) {
+        Node* ancestor=lca(root,a,b);
+        
+        int h1=height(ancestor,a);
+        int h2=height(ancestor,b);
+        return h1+h2;
+    }
