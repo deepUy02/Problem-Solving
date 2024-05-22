@@ -1,4 +1,15 @@
 Approach-1(Recursion)
+int solveRecursion(int n ){
+        if( n == 0){
+            return 0;
+        }
+        int maximumCount = INT_MAX;
+        for(int i = 1;i*i <= n;i++){
+            int ans = 1 + solveRecursion(n - i*i);
+            maximumCount = min(maximumCount , ans);
+        }
+        return maximumCount;
+    }
 
 Approach-2(Rec + Memo)
 int solveMemorization(int n,vector<int>&dp){
